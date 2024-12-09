@@ -3,7 +3,8 @@
 项目命名规范总是令人头疼的
 本项目初步解决文件批量命名问题，极其适用于大学/办公使用，收集文件一般命名为xx-xx-xx
 ## 详细使用过程
-本项目可以规范分隔符，由您亲自定制并修改，修改规范为
+本项目可以规范分隔符，由您亲自定制并修改
+
 首先
 ![image](https://github.com/user-attachments/assets/431899a2-cbc8-4b57-ada4-9eafc2b4e21e)
 对该代码相关部分进行修改，运行changeUnderline.bat
