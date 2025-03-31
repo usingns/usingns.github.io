@@ -6,7 +6,7 @@
   <link href="https://usingns.github.io/atom.xml" rel="self"/>
   
   <link href="https://usingns.github.io/"/>
-  <updated>2025-03-31T11:07:51.163Z</updated>
+  <updated>2025-03-31T11:36:24.573Z</updated>
   <id>https://usingns.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://usingns.github.io/2025/03/31/%E5%85%B3%E4%BA%8E%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA/"/>
     <id>https://usingns.github.io/2025/03/31/%E5%85%B3%E4%BA%8E%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA/</id>
     <published>2025-03-31T11:07:23.000Z</published>
-    <updated>2025-03-31T11:07:51.163Z</updated>
+    <updated>2025-03-31T11:36:24.573Z</updated>
     
     <content type="html"><![CDATA[<p>很早就有这样的想法，断断续续又有半途而废，终于直到今天才决定完全做成</p><h2 id="首先使用github-hexo的组合"><a href="#首先使用github-hexo的组合" class="headerlink" title="首先使用github+hexo的组合"></a>首先使用github+hexo的组合</h2><p>Hexo 是<strong>一款基于Node.js 的快速、简洁且高效的静态博客框架</strong><br>知道这些就够了()只是抱着使用的想法来了解<br>#git安装<br>#node安装 %%别忘了环境变量的配置%%<br>#安装hexo</p><h2 id="git-ssh-key"><a href="#git-ssh-key" class="headerlink" title="git ssh key"></a>git ssh key</h2><p>为什么要配置SSH key？ 目的：可以免密的将本地的源码和资源上传到github，无需要每次都输账号和密码。<br>本地生成</p><p>上传到github</p><p>配置git用户名和用户邮箱</p><h2 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;postName&quot; #新建文章 </span><br><span class="line">hexo new page &quot;pageName&quot; #新建页面 </span><br><span class="line">hexo generate #生成静态页面至public目录 </span><br><span class="line">hexo server #开启预览访问端口（默认端口4000，&#x27;ctrl + c&#x27;关闭server） </span><br><span class="line">hexo deploy #部署到GitHub </span><br><span class="line">hexo help # 查看帮助 </span><br><span class="line">hexo version #查看Hexo的版本</span><br></pre></td></tr></table></figure><p>在选择的根目录进行初步搭建，并修改_config.yml</p><h2 id="主题选择"><a href="#主题选择" class="headerlink" title="主题选择"></a>主题选择</h2><p>hexo的github主题项目，下载解压到theme，记得修改配置文件<br>大功告成~</p><p>参考</p><p><a href="https://cloud.tencent.com/developer/article/1852344">https://cloud.tencent.com/developer/article/1852344</a></p>]]></content>
     
@@ -34,6 +34,16 @@
     
     
     
+    <category term="博客搭建" scheme="https://usingns.github.io/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    
+    
+    <category term="Hexo" scheme="https://usingns.github.io/tags/Hexo/"/>
+    
+    <category term="github" scheme="https://usingns.github.io/tags/github/"/>
+    
+    <category term="node.js" scheme="https://usingns.github.io/tags/node-js/"/>
+    
+    <category term="ssh" scheme="https://usingns.github.io/tags/ssh/"/>
     
   </entry>
   
