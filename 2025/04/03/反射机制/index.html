@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+<!-- keywords -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="us1n9ns">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="us1n9ns">
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    <meta name="description" content="">
+    <meta name="description" content="（抽象概念）RTTI（Run-Time Type Identification）运行时类型识别，主要两种方式  传统的RTTI，我们编写知道所有的类型·  反射机制，允许在运行时查询和操作类的信息  太抽象了举例子  正常写代码，一个类写出来  123456789101112131415161718192021222324public class showclass &#123;      St">
+<meta property="og:type" content="article">
+<meta property="og:title" content="反射机制">
+<meta property="og:url" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="（抽象概念）RTTI（Run-Time Type Identification）运行时类型识别，主要两种方式  传统的RTTI，我们编写知道所有的类型·  反射机制，允许在运行时查询和操作类的信息  太抽象了举例子  正常写代码，一个类写出来  123456789101112131415161718192021222324public class showclass &#123;      St">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/1.png">
+<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/2.png">
+<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/3.png">
+<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/4.png">
+<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/5.png">
+<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/6.png">
+<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/7.png">
+<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/8.png">
+<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/9.png">
+<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/10.png">
+<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/11.png">
+<meta property="article:published_time" content="2025-04-03T03:07:50.000Z">
+<meta property="article:modified_time" content="2025-07-14T05:16:01.122Z">
+<meta property="article:author" content="us1n9ns">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/1.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    <title>反射机制 · us1n9ns&#39;s Blog</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .footer-fixed-btn,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(
+            -45deg,
+            #444 0,
+            #444 80px,
+            #333 80px,
+            #333 160px
+        );
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link id="stylesheet-fancybox" rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-base" rel="preload" href="/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-mobile" rel="preload" href="/css/mobile.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='screen and (max-width: 960px)'">
+    <link id="stylesheet-theme-dark" rel="preload" href="/css/dark.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    <!-- 百度统计  -->
+    <!-- 谷歌统计  -->
+    <!-- Google tag (gtag.js) -->
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+        <body class="post-body">
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        <div class="header-sidebar-menu">
+            <div style="padding-left: 1px;">&#xe775;</div>
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href="/">us1n9ns's Blog.</a>
+        </span>
+    </div>
+    <!-- toggle banner -->
+    <div class="banner">
+        <div class="blog-title header-element">
+            <a href="/">us1n9ns&#39;s Blog.</a>
+        </div>
+        <div class="post-title header-element">
+            <a href="#" class="post-name">反射机制</a>
+        </div>
+    </div>
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- donate button -->
+
+    <!-- back to top button -->
+    <div class="footer-fixed-btn footer-fixed-btn--hidden back-top">
+        <div>&#xe639;</div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="    height:50vh;
+">
+    <!-- 主页  -->
+    <!-- 404页  -->
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+                反射机制
+            <!-- 404 -->
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            <!-- 404 -->
+        </p>
+        <!-- 文章页 meta -->
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                    <div class="post-intro-tags" >
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+</div>
+
+                <!-- 文章字数统计 -->
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">746</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                    </div>
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2025/04/03</span>
+                    <!-- busuanzi -->
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" alt="loading">
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <ul>
+<li>（抽象概念）RTTI（Run-Time Type Identification）运行时类型识别，主要两种方式<br>  传统的RTTI，我们编写知道所有的类型·<br>  反射机制，允许在运行时查询和操作类的信息<br>  太抽象了举例子<br>  正常写代码，一个类写出来</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class showclass &#123;  </span><br><span class="line">    String classname;  </span><br><span class="line">    //默认无参方法  </span><br><span class="line">    showclass() &#123;&#125;  </span><br><span class="line">    //有参方法  </span><br><span class="line">    showclass(String classname) &#123;  </span><br><span class="line">        //初始化  </span><br><span class="line">        this.classname = classname;  </span><br><span class="line">    &#125;  </span><br><span class="line">    void show() &#123;  </span><br><span class="line">        System.out.println(classname+&quot;:show&quot;);  </span><br><span class="line">    &#125;  </span><br><span class="line">    //重载方法  </span><br><span class="line">    void show(String massage) &#123;  </span><br><span class="line">        System.out.println(classname+&quot;:&quot;+massage);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    @Override  </span><br><span class="line">    public String toString() &#123;  </span><br><span class="line">        return &quot;showclass&#123;&quot; +  </span><br><span class="line">                &quot;classname=&#x27;&quot; + classname + &#x27;\&#x27;&#x27; +  </span><br><span class="line">                &#x27;&#125;&#x27;;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用（我已经知道类的信息了）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;  </span><br><span class="line">    public static void main(String[] args) &#123;  </span><br><span class="line">        showclass showclass = new showclass(&quot;LiMing&quot;);  </span><br><span class="line">        showclass.show();  </span><br><span class="line">  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/1.png" class="">
+<p>但是你不知道，程序只能靠运行时信息来发现，自然也就没法在编码阶段直接使用new来创建对象和使用对象，但是使用反射来使用showclass类是可以的</p>
+<p>（资料）在sping中，就有反射来动态构造类和属性的使用</p>
+<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/2.png" class="">
+<p>指定需要class，sping就会帮我们创建好并进行赋值</p>
+<p>那使用反射来进行刚才的操作：<br>获取类，创建对象，属性赋值，调用方法<br>（想写的都在注释里面）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;  </span><br><span class="line">    public static void main(String[] args) throws Exception &#123;  </span><br><span class="line">        //外部包可以是&quot;com.xxx.showclass&quot;,这里没有所以直接使用showclass  </span><br><span class="line">        //可能会出现找不到类的错误，把它放进异常里面  </span><br><span class="line">        Class c=Class.forName(&quot;showclass&quot;);  </span><br><span class="line">        //我们要如何根据c信息操作呢  </span><br><span class="line">        // 所有类都是继承自Object  </span><br><span class="line">        Object obj=c.newInstance();  </span><br><span class="line">        System.out.println(obj);  </span><br><span class="line">  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/3.png" class="">
+<p>但是想要传入message有参构造就不能使用newInstance()了，而且java9之后这个方法也被废弃了，我么可以使用getConstructor()获取构造器</p>
+<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/4.png" class="">
+<p>接收的是一堆类型是因为重载</p>
+<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/5.png" class="">
+
+<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/6.png" class="">
+<p>这种情况下会报错，说找不到方法，因为前面属性定义问题，如果换成public就可以了，但更改不是咱们说了算的，所以使用getgetDeclaredConstructor()方法获取所有的构造器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import java.lang.reflect.Constructor;  </span><br><span class="line">  </span><br><span class="line">public class Main &#123;  </span><br><span class="line">    public static void main(String[] args) throws Exception &#123;  </span><br><span class="line">        Class c=Class.forName(&quot;showclass&quot;);  </span><br><span class="line">  </span><br><span class="line">        Constructor cs=c.getDeclaredConstructor(String.class);  </span><br><span class="line">        Object o =  cs.newInstance(&quot;Jenny&quot;);  </span><br><span class="line">  </span><br><span class="line">        System.out.println(o);  </span><br><span class="line">  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行成功<br>想要修改一个类中的属性</p>
+<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/7.png" class="">
+<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/8.png" class="">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import java.lang.reflect.Constructor;  </span><br><span class="line">import java.lang.reflect.Field;  </span><br><span class="line">  </span><br><span class="line">public class Main &#123;  </span><br><span class="line">    public static void main(String[] args) throws Exception &#123;  </span><br><span class="line">        Class c=Class.forName(&quot;showclass&quot;);  </span><br><span class="line">  </span><br><span class="line">        Constructor cs=c.getDeclaredConstructor(String.class);  </span><br><span class="line">        Object o =  cs.newInstance(&quot;Jenny&quot;);  </span><br><span class="line">  </span><br><span class="line">        Field f=c.getDeclaredField(&quot;classname&quot;);  </span><br><span class="line">        f.setAccessible(true);  </span><br><span class="line">        f.set(o,&quot;Denny&quot;);  </span><br><span class="line">  </span><br><span class="line">        System.out.println(o);  </span><br><span class="line">  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过对属性权限的修改，然后修改属性的value<br>同样的如果想要获取方法，使用getMethods()获得public级别的方法，使用getDeclaredMethods()获取所有权限的方法</p>
+<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/9.png" class="">
+<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/10.png" class="">
+<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/11.png" class="">
+
+<p>如果方法为私有，也可以同样的设置setAccessible(ture)来进行修改</p>
+<p>以上为java反射机制的基础知识</p>
+<hr>
+
+    </article>
+    <!-- license -->
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2025/07/14/%E4%B8%8A%E6%B5%B7%E4%BA%A4%E9%80%9A%E5%A4%A7%E5%AD%A6%E7%94%9F%E5%AD%98%E6%89%8B%E5%86%8C%E9%9A%8F%E7%AC%94/" title="上海交通大学生存手册随笔">
+                    <div class="nextTitle">上海交通大学生存手册随笔</div>
+                </a>
+        </li>
+        <li class="previous">
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2025/03/31/%E5%85%B3%E4%BA%8E%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA/" title="关于个人博客的搭建">
+                    <div class="prevTitle">关于个人博客的搭建</div>
+                </a>
+        </li>
+    </ul>
+    <!-- comment -->
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+            
+            
+            
+            <!-- utteranc评论 -->
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+            
+            
+            
+        </div>
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    <!-- Mathjax -->
+</main>
+
+                <!-- profile -->
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+        <div class="social">
+                            <a href="mailto:2529090798@qq.com" class="iconfont-archer email" title="email" ></a>
+                <a href="//github.com/usingns" class="iconfont-archer github" target="_blank" title="github"></a>
+                <span class="iconfont-archer wechat" title="wechat">
+                    <img class="profile-qr" src="/assets/example_qr.png" />
+                </span>
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+
+        </div>
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    <!-- 不蒜子  -->
+        <div class="busuanzi-container">
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+        </div>
+</footer>
+
+        </div>
+        <!-- toc -->
+            <div class="toc-wrapper toc-wrapper-loding" style=    top:50vh;
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                
+            </div>
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+        
+        
+        
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 3
+        </div>
+        <!-- search  -->
+    </div>
+    <div class="post-archive">
+            <div class="archive-year"> 2025 </div>
+            <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/14</span>
+            <a class="archive-post-title" href="/2025/07/14/%E4%B8%8A%E6%B5%B7%E4%BA%A4%E9%80%9A%E5%A4%A7%E5%AD%A6%E7%94%9F%E5%AD%98%E6%89%8B%E5%86%8C%E9%9A%8F%E7%AC%94/">上海交通大学生存手册随笔</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/03</span>
+            <a class="archive-post-title" href="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/">反射机制</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/31</span>
+            <a class="archive-post-title" href="/2025/03/31/%E5%85%B3%E4%BA%8E%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA/">关于个人博客的搭建</a>
+        </li>
+            </ul>
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+            <span class="sidebar-tag-name" data-tags="Java">
+                <span class="iconfont-archer">&#xe606;</span>
+                Java
+            </span>
+            <span class="sidebar-tag-name" data-tags="上海交通大学生存手册">
+                <span class="iconfont-archer">&#xe606;</span>
+                上海交通大学生存手册
+            </span>
+            <span class="sidebar-tag-name" data-tags="Hexo">
+                <span class="iconfont-archer">&#xe606;</span>
+                Hexo
+            </span>
+            <span class="sidebar-tag-name" data-tags="github">
+                <span class="iconfont-archer">&#xe606;</span>
+                github
+            </span>
+            <span class="sidebar-tag-name" data-tags="node.js">
+                <span class="iconfont-archer">&#xe606;</span>
+                node.js
+            </span>
+            <span class="sidebar-tag-name" data-tags="ssh">
+                <span class="iconfont-archer">&#xe606;</span>
+                ssh
+            </span>
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+        <span class="sidebar-category-name" data-categories="Java_Security">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Java_Security
+        </span>
+        <span class="sidebar-category-name" data-categories="博客搭建">
+            <span class="iconfont-archer">&#xe60a;</span>
+            博客搭建
+        </span>
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://usingns.github.io",
+        root: siteMetaRoot,
+        author: "us1n9ns"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+        <!-- main func -->
+        <script src="/scripts/main.js"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js" onload="window.Fancybox.bind('[data-fancybox]')" defer></script>
+        <!-- algolia -->
+        <!-- busuanzi -->
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        <!-- async load share.js -->
+            <script src="/scripts/share.js" async></script>
+        <!-- mermaid -->
+            <script src='https://cdn.jsdelivr.net/npm/mermaid@8.11.0/dist/mermaid.min.js' onload="window.mermaid.initialize({theme: 'dark'})" async></script>
+    </body>
+</html>
