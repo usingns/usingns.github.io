@@ -400,6 +400,37 @@
                 <main class="main index-page">
             
         <article class="index-post">
+            <a class="abstract-title" href="/2025/07/20/RMI/">
+                <span class="abstract-title-text">RMI</span>
+            </a>
+            <div class="abstract-content">
+                远程方法调用结构简单分为：
+
+客户端
+客户端注册中心
+服务端
+服务端注册中心
+
+调用要求首先，客户端和服务端需要用有相同的接口，不同的是服务端还需要有接口的具体实现方法，这也比较符合常识其次，接口必须要被实现后才能进行调用，客户端通过注册中心动态代理生成，负责把方法调用通过网络传递到服务端，而服务端注册中心解析客户端注册中心请求，然后服务端调用真正接口实现函数
+测试demo服务端#创建接口
+1234567891011121314151617181920212223242526272829  import java.rmi.Remote;  import java.rmi.Remote;i...
+            </div>
+            <!-- read more -->
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2025/07/20">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2025/07/20</span>
+                </div>
+                <!-- tags -->
+                    <div class="abstract-tags" >
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+</div>
+
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+            
+        <article class="index-post">
             <a class="abstract-title" href="/2025/07/17/CC1%E9%93%BE/">
                 <span class="abstract-title-text">CC1链</span>
             </a>
@@ -515,15 +546,20 @@ Apache Commons提供了很多工具类库，他们几乎不依赖其他的第三
         
         
         
+        
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 5
+        Total : 6
         </div>
         <!-- search  -->
     </div>
     <div class="post-archive">
             <div class="archive-year"> 2025 </div>
             <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/20</span>
+            <a class="archive-post-title" href="/2025/07/20/RMI/">RMI</a>
+        </li>
         <li class="archive-post-item">
             <span class="archive-post-date">07/17</span>
             <a class="archive-post-title" href="/2025/07/17/CC1%E9%93%BE/">CC1链</a>

