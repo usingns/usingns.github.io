@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://usingns.github.io/archives/2025/07/">
+<meta property="og:url" content="https://usingns.github.io/categories/Cloud-Security/">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="us1n9ns">
@@ -430,112 +430,6 @@ CVSS漏洞影响评分高，低，无影响
                 <!-- tags -->
                     <div class="abstract-tags" >
         <a class="post-tag" href="javascript:void(0);" data-tags="Cloud_First">Cloud_First</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/2025/07/20/RMI/">
-                <span class="abstract-title-text">RMI</span>
-            </a>
-            <div class="abstract-content">
-                远程方法调用结构简单分为：
-
-客户端
-客户端注册中心
-服务端
-服务端注册中心
-
-调用要求首先，客户端和服务端需要用有相同的接口，不同的是服务端还需要有接口的具体实现方法，这也比较符合常识其次，接口必须要被实现后才能进行调用，客户端通过注册中心动态代理生成，负责把方法调用通过网络传递到服务端，而服务端注册中心解析客户端注册中心请求，然后服务端调用真正接口实现函数
-测试demo服务端#创建接口
-1234567891011121314151617181920212223242526272829  import java.rmi.Remote;  import java.rmi.Remote;i...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2025/07/20">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2025/07/20</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/2025/07/17/CC1%E9%93%BE/">
-                <span class="abstract-title-text">CC1链</span>
-            </a>
-            <div class="abstract-content">
-                这个是之前学过一点的，但是当时只是基于理论而没有动手实践，就像在看政治知识点，一段时间就忘记了，这次系统的来学一下，我本想是和上一期一样进行链条梳理一遍，但是发现那样就只能知道链条可以这么打，但是这是怎么来，为什么要这么打的问题就没法得到解决，所以还是正面来一遍吧。
-前情提要什么是Apache CommonsApache Commons是Apache软件基金会的项目，Commons的目的是提供可重用的，开源的代码。
-Apache Commons提供了很多工具类库，他们几乎不依赖其他的第三方的类库，接口稳定，集成简单，可以大大提高编码效率和代码质量。当中有一个组件Apache Common...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2025/07/17">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2025/07/17</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/2025/07/15/URLDNS%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%88%A9%E7%94%A8%E9%93%BE-%E4%BB%8E%E7%99%BE%E8%8D%89%E5%9B%AD%E5%86%99%E5%88%B0%E4%B8%89%E5%91%B3%E4%B9%A6%E5%B1%8B/">
-                <span class="abstract-title-text">URLDNS反序列化利用链(从百草园写到三味书屋)</span>
-            </a>
-            <div class="abstract-content">
-                选择原因：环境要求少少有的对环境没有什么要求的链子作用：被反序列化的时候发起DNS请求
-12345*   Gadget Chain:*     HashMap.readObject()*       HashMap.putVal()*         HashMap.hash()*           URL.hashCode()
-简单演示利用过程12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455import java.io.*;impo...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2025/07/16">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2025/07/15</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-            
-        <article class="index-post">
-            <a class="abstract-title" href="/2025/07/14/%E4%B8%8A%E6%B5%B7%E4%BA%A4%E9%80%9A%E5%A4%A7%E5%AD%A6%E7%94%9F%E5%AD%98%E6%89%8B%E5%86%8C%E9%9A%8F%E7%AC%94/">
-                <span class="abstract-title-text">上海交通大学生存手册随笔</span>
-            </a>
-            <div class="abstract-content">
-                真正成为我们上课理由的，只有对知识的渴望
-学习需要的不是悲壮的毅力，是对知识的渴求
-平庸的生活方式是麻醉剂
-我们必须一日三省，今天的时间是否过得有价值
-
-我们应该对计划时间下的工作量有足够认识。小到一小时、一天，大到个暑假、一个学期，或者是大学四年，制定切实可行的计划，并为不能完成计划自责是最基本的要求。所谓的牛人和大多数庸人的主要差别，一方面在于有没有时间可以利用;再一方面，就是时间的利用率。我们必须时刻保持一种紧迫感，以保证时间不被虚度。只要你能把在校期问的时问正确地加以利用。不需要超人的天分–甚至不需要特别努力，你都有望在你的专业领域里出类拔萃。危险的。在科研这条道路上，只有对一门...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2025/07/14">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2025/07/14</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="note">note</a>
 </div>
 
             </div>

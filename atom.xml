@@ -6,7 +6,7 @@
   <link href="https://usingns.github.io/atom.xml" rel="self"/>
   
   <link href="https://usingns.github.io/"/>
-  <updated>2025-07-20T06:20:23.764Z</updated>
+  <updated>2025-07-27T08:37:25.290Z</updated>
   <id>https://usingns.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Lesson初次了解云安全</title>
+    <link href="https://usingns.github.io/2025/07/27/FirstLesson%E5%88%9D%E6%AC%A1%E4%BA%86%E8%A7%A3%E4%BA%91%E5%AE%89%E5%85%A8/"/>
+    <id>https://usingns.github.io/2025/07/27/FirstLesson%E5%88%9D%E6%AC%A1%E4%BA%86%E8%A7%A3%E4%BA%91%E5%AE%89%E5%85%A8/</id>
+    <published>2025-07-27T08:32:21.000Z</published>
+    <updated>2025-07-27T08:37:25.290Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="隔离桌面服务"><a href="#隔离桌面服务" class="headerlink" title="隔离桌面服务"></a>隔离桌面服务</h1><p>宗旨在于尽可能的减少攻击面</p><p>首先，从学术角度解析可能存在的威胁</p><ul><li><p>保密性</p></li><li><p>完整性</p></li><li><p>可用性</p><p>网站上可见的应用程序数据不是秘密的，事实上，系统几乎没有文件会包含机密，因此，机密性失败不会产生任何影响。</p><p>可用性和完整性</p><p>可用性，通常，托管良好的网站会对访问者进行快速响应，dos，ddos<br>完整性，显然，网站必须防范完整性攻击，这一直是网站面临的挑战</p></li></ul><h1 id="CVSS"><a href="#CVSS" class="headerlink" title="CVSS"></a>CVSS</h1><p>漏洞影响评分<br>高，低，无影响</p><p>针对web服务的攻击或者软件攻击，他们可以来自互联网的任何地方，包括互联网流量直接触及的所有软件</p><p>这些软件的每一个漏洞都可能提供攻击媒介<br>网络设备驱动媒介是第一个可见的软件，驱动程序嵌入在操作系统中<br>协议栈处理基本的网络服务<br>web服务器实现应用程序<br>每个软件组件都尽可能地专注于自己的工作，忽视(不处理)用于其他组件的数据</p><p>如今，大多数漏洞出现在服务器软件上，通过尽可能地减少服务，将未使用的端口连接到其他服务器软件，尽量避免重复常用的端口号</p><p>文件系统，检索文件</p><p>现代计算机配备态势感知，日志记录，这不能防止，但是可以保留，以防出现</p><h1 id="云计算服务模型"><a href="#云计算服务模型" class="headerlink" title="云计算服务模型"></a>云计算服务模型</h1><p>云服务器包含典型的服务器组件<br>硬件层提供存储，计算能力和网络连接<br>操作系统<br>中间件层，其中包含编程语言和服务库等工具<br>云应用程序</p><p>计算机是通过管理员进行维护，谁在云端修复了什么？<br>根据服务模式在云供应商和云消费者之间进行分工。</p><p>供应商从硬件层向上处理事情，全方位服务提供商运用资源满足服务需求，可以为操作系统分配更多进程，或者为消费者的服务分配更多的虚拟硬件<br>消费者从应用程序向下处理事物，包括配置客户群以及自定义用用程序开发</p><p>具体来说还要看服务模式<br>分为基础设施服务IAAS，平台服务PAAS，软件服务SAAS</p><p>IAAS显然是操作系统。基础架构可能由物理机或者虚拟机组成<br>PAAS提供了更多的软件支持，负责维护硬件，操作系统和中间件对的某些层。不过某些工艺工商也可能会专注于特定的语言或者框架，Java,Drupal,JavaScript等<br>PAAS有几个例子，比如云存储，用户非常重视移动性和可靠性。再比如容器概念<br>SAAS顾名思义，提供商提供软件的大部分责任</p><h1 id="云部署模型"><a href="#云部署模型" class="headerlink" title="云部署模型"></a>云部署模型</h1><p>云部署模型：公有云 &#x2F; 私有云 &#x2F; 混合云 &#x2F; 社区云</p><h2 id="云部署的安全策略"><a href="#云部署的安全策略" class="headerlink" title="云部署的安全策略"></a>云部署的安全策略</h2><h3 id="身份与访问控制IAM"><a href="#身份与访问控制IAM" class="headerlink" title="身份与访问控制IAM"></a>身份与访问控制IAM</h3><ul><li>最小权限原则</li><li>多因子认证</li><li>角色管理与策略</li><li>服务间授权：使用临时凭证或者访问角色让服务之间通信</li></ul><h3 id="数据安全"><a href="#数据安全" class="headerlink" title="数据安全"></a>数据安全</h3><ul><li>传输加密：使用 TLS（HTTPS、SSL）确保数据在传输中安全</li><li>静态加密：客户管理密钥和云厂商托管密钥，支持BYOK(Bring Your Own Key)</li><li>敏感数据脱敏&#x2F;分级存储</li></ul><h3 id="网络安全"><a href="#网络安全" class="headerlink" title="网络安全"></a>网络安全</h3><ul><li>虚拟私有云VPC划分子网，控制流量入口出口</li><li>安全组+网络ACL控制通信</li><li>配置Bastion Host&#x2F;VPN来管理远程访问</li><li>使用WAF防止常见Web攻击</li></ul><h3 id="日志与监控"><a href="#日志与监控" class="headerlink" title="日志与监控"></a>日志与监控</h3><ul><li>集中式日志收集</li><li>实时监控与告警</li><li>设置SIEM系统(Splunk,ELK)用于入侵检测与审计</li></ul><h3 id="高可用与灾备"><a href="#高可用与灾备" class="headerlink" title="高可用与灾备"></a>高可用与灾备</h3><ul><li>多区域部署</li><li>数据快照与自动备份</li><li>自动故障转移机制Failover</li><li>灾备演练与业务连续性计划（BCP）</li></ul><h2 id="云架构设计-适用于云原生应用或迁移方案"><a href="#云架构设计-适用于云原生应用或迁移方案" class="headerlink" title="云架构设计(适用于云原生应用或迁移方案)"></a>云架构设计(适用于云原生应用或迁移方案)</h2><h3 id="可用性设计"><a href="#可用性设计" class="headerlink" title="可用性设计"></a>可用性设计</h3><ul><li>使用负载均衡（ALB&#x2F;ELB）实现服务分流<br>将进入的请求流量分发到多台后端服务器，提高系统可用性，伸缩性，容错能力</li><li>多可用区部署（高可用架构）</li><li>自动扩缩容（Auto Scaling）- 使用负载均衡（ALB&#x2F;ELB）实现服务分流</li><li>多可用区部署（高可用架构）</li><li>自动扩缩容（Auto Scaling）</li></ul><h3 id="解耦与微服务化"><a href="#解耦与微服务化" class="headerlink" title="解耦与微服务化"></a>解耦与微服务化</h3><ul><li>使用消息队列（如 AWS SQS、Kafka）解耦组件（？）</li><li>构建微服务架构（如容器 + Service Mesh）</li><li>使用 Serverless（如 AWS Lambda）构建事件驱动架构（动态分配）</li></ul><h3 id="弹性设计"><a href="#弹性设计" class="headerlink" title="弹性设计"></a>弹性设计</h3><ul><li>配置 Auto Scaling Group（ASG）（自动扩容，自动缩容）</li><li>无状态服务设计（实例之间不进行共享或者本地存储，便于横向扩展，会话管理使用集中式缓存Redis等，用户数据上传保存到对象存储。应用逻辑保持幂等性也就是多次请求处理结果相同）</li><li>使用 CDN 提供静态内容（如 CloudFront）</li></ul><h3 id="容器与编排"><a href="#容器与编排" class="headerlink" title="容器与编排"></a>容器与编排</h3><ul><li>使用 Docker 容器构建应用</li><li>使用 Kubernetes（K8s）管理容器编排与调度</li><li>实现蓝绿部署 &#x2F; 灰度发布 &#x2F; 回滚机制（蓝绿是同时运行的两个环境，一个是线上环境，另一个为备份，灰度发布就是新版本只给部分用户）</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;隔离桌面服务&quot;&gt;&lt;a href=&quot;#隔离桌面服务&quot; class=&quot;headerlink&quot; title=&quot;隔离桌面服务&quot;&gt;&lt;/a&gt;隔离桌面服务&lt;/h1&gt;&lt;p&gt;宗旨在于尽可能的减少攻击面&lt;/p&gt;
+&lt;p&gt;首先，从学术角度解析可能存在的威胁&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p</summary>
+      
+    
+    
+    
+    <category term="Cloud_Security" scheme="https://usingns.github.io/categories/Cloud-Security/"/>
+    
+    
+    <category term="Cloud_First" scheme="https://usingns.github.io/tags/Cloud-First/"/>
+    
+  </entry>
   
   <entry>
     <title>RMI</title>
